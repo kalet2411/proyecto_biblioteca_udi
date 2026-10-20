@@ -1,0 +1,713 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica del documento -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Biblioteca universitaria: consulta libros y solicita equipos de cómputo.">
+
+    <title>BiblioCampus UDI | Biblioteca Universitaria</title>
+
+    <!-- Conexión con la hoja de estilos externa -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- ENCABEZADO: logo y navegación principal -->
+    <header class="header" id="inicio">
+        <div class="contenedor navbar">
+
+            <a class="logo" href="#inicio" aria-label="BiblioCampus UDI, ir al inicio">
+                <img src="images/logo_udi.png"
+                     alt="Universidad de Investigacion"
+                     class="logo-udi">
+                <span class="logo-texto">
+                    <span>Biblio<span class="logo-acento">Campus</span></span>
+                    <small>Universidad de Investigacion</small>
+                </span>
+            </a>
+
+            <nav class="navegacion" aria-label="Navegación principal">
+                <a href="#inicio" class="nav-link activo">Inicio</a>
+                <a href="#catalogo" class="nav-link">Catálogo de libros</a>
+                <a href="#computo" class="nav-link">Préstamo de cómputo</a>
+                <a href="panel.html" class="nav-link" data-abrir-login>Mi panel</a>
+            </nav>
+
+            <div class="navbar-acciones">
+                <a href="panel.html" class="usuario-nav" id="usuarioNav" hidden>
+                    <span class="usuario-avatar" id="usuarioAvatar">E</span>
+                    <span class="usuario-datos">
+                        <strong id="usuarioNavNombre">Estudiante</strong>
+                        <small id="usuarioNavCorreo">estudiante@universidad.edu</small>
+                    </span>
+                </a>
+
+                <button type="button"
+                        class="boton boton-secundario boton-login"
+                        id="abrirLogin"
+                        data-abrir-login>
+                    Iniciar sesión
+                </button>
+
+                <button type="button"
+                        class="boton boton-secundario boton-salir-nav"
+                        id="cerrarSesionNav"
+                        hidden>
+                    Cerrar sesión
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- HERO: bienvenida y buscador del catálogo -->
+        <section class="hero" aria-labelledby="titulo-principal">
+            <div class="contenedor hero-contenido">
+
+                <div class="hero-texto">
+                    <span class="etiqueta">TU ESPACIO DE CONOCIMIENTO</span>
+
+                    <h1 id="titulo-principal">
+                        Cada libro abre una nueva
+                        <span>posibilidad.</span>
+                    </h1>
+
+                    <p>
+                        Explora nuestra colección académica, encuentra
+                        recursos para tus estudios y reserva tu próximo libro.
+                    </p>
+
+                    <!-- El buscador consulta títulos, autores y áreas -->
+                    <form class="buscador" action="#catalogo" method="get">
+                        <label class="solo-lectores" for="buscar">
+                            Buscar libros por título, autor o área
+                        </label>
+
+                        <span aria-hidden="true">⌕</span>
+
+                        <input
+                            type="search"
+                            id="buscar"
+                            name="q"
+                            placeholder="¿Qué quieres aprender hoy?"
+                        >
+
+                        <button class="boton boton-primario" type="submit">
+                            Buscar
+                        </button>
+                    </form>
+
+                    <div class="hero-detalles">
+                        <span>✓ Recursos académicos</span>
+                        <span>✓ Espacios de estudio</span>
+                        <span>✓ Préstamo de equipos</span>
+                    </div>
+                </div>
+
+                <!-- Ilustración creada con HTML y CSS, sin imágenes externas -->
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="circulo-decorativo"></div>
+                    <div class="libro-ilustrado libro-atras"></div>
+
+                    <div class="libro-ilustrado libro-principal">
+                        <div class="libro-simbolo">✦</div>
+                        <div class="libro-linea"></div>
+                        <div class="libro-linea corta"></div>
+                        <div class="libro-etiqueta">CONOCIMIENTO</div>
+                    </div>
+
+                    <div class="nota-flotante">
+                        <span class="nota-icono">✧</span>
+                        <div>
+                            <strong>Descubre algo nuevo</strong>
+                            <small>Tu próxima lectura te espera</small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ACCESOS RÁPIDOS A LOS SERVICIOS -->
+        <section class="contenedor accesos" aria-label="Servicios de la biblioteca">
+
+            <a href="#catalogo" class="acceso">
+                <span class="acceso-icono azul">▤</span>
+                <span>
+                    <strong>Catálogo digital</strong>
+                    <small>Encuentra tus libros</small>
+                </span>
+                <span class="flecha" aria-hidden="true">↗</span>
+            </a>
+
+            <a href="#computo" class="acceso">
+                <span class="acceso-icono verde">▣</span>
+                <span>
+                    <strong>Equipos de cómputo</strong>
+                    <small>Solicita un espacio</small>
+                </span>
+                <span class="flecha" aria-hidden="true">↗</span>
+            </a>
+
+            <a href="panel.html" class="acceso" data-abrir-login>
+                <span class="acceso-icono naranja">☆</span>
+                <span>
+                    <strong>Mi panel</strong>
+                    <small>Consulta tus solicitudes</small>
+                </span>
+                <span class="flecha" aria-hidden="true">↗</span>
+            </a>
+
+        </section>
+
+
+        <!-- CATÁLOGO: tarjetas de libros organizadas en una cuadrícula -->
+        <section class="seccion catalogo" id="catalogo">
+            <div class="contenedor">
+
+                <div class="encabezado-seccion">
+                    <div>
+                        <span class="etiqueta">EXPLORA Y APRENDE</span>
+                        <h2>Libros destacados</h2>
+                        <p>Una selección para acompañar tu vida académica.</p>
+                    </div>
+
+                    <a href="#catalogo" class="enlace-mas">
+                        Explorar catálogo <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+
+                <!-- Categorías que funcionan como filtros visuales -->
+                <div class="categorias" aria-label="Filtrar por categoría">
+                    <a href="#catalogo" class="categoria seleccionada">Todos</a>
+                    <a href="#libro-programacion" class="categoria">Tecnología</a>
+                    <a href="#libro-calculo" class="categoria">Matemáticas</a>
+                    <a href="#libro-diseno" class="categoria">Diseño</a>
+                    <a href="#libro-fisica" class="categoria">Ciencias</a>
+                    <a href="#libro-psicologia" class="categoria">Sociales</a>
+                    <a href="#libro-historia" class="categoria">Humanidades</a>
+                    <a href="#libro-marketing" class="categoria">Administración</a>
+                </div>
+
+                <div class="libros-grid">
+
+                    <!-- Libro 1: programación -->
+                    <article class="libro-card" id="libro-programacion">
+                        <div class="portada portada-programacion">
+                            <span class="portada-etiqueta">TECNOLOGÍA</span>
+                            <div class="portada-grafico" aria-hidden="true">&lt;/&gt;</div>
+                            <h3>Clean Code</h3>
+                            <p>Guía de estilo para software</p>
+                            <span class="portada-numero">01</span>
+                        </div>
+
+                        <div class="libro-info">
+                            <span class="libro-area">PROGRAMACIÓN</span>
+                            <h3>Clean Code</h3>
+                            <p class="autor">Robert C. Martin</p>
+
+                            <div class="libro-pie">
+                                <span class="estado disponible">
+                                    <span></span> Disponible
+                                </span>
+                                <button type="button"
+                                        class="boton boton-reservar"
+                                        data-abrir-login>
+                                    Reservar libro
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Libro 2: matemáticas -->
+                    <article class="libro-card" id="libro-calculo">
+                        <div class="portada portada-matematicas">
+                            <span class="portada-etiqueta">CIENCIAS EXACTAS</span>
+                            <div class="formula" aria-hidden="true">∫ f(x) dx</div>
+                            <h3>Cálculo</h3>
+                            <p>Conceptos y aplicaciones</p>
+                            <span class="portada-numero">02</span>
+                        </div>
+
+                        <div class="libro-info">
+                            <span class="libro-area">MATEMÁTICAS</span>
+                            <h3>Cálculo</h3>
+                            <p class="autor">James Stewart</p>
+
+                            <div class="libro-pie">
+                                <span class="estado disponible">
+                                    <span></span> Disponible
+                                </span>
+                                <button type="button"
+                                        class="boton boton-reservar"
+                                        data-abrir-login>
+                                    Reservar libro
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Libro 3: diseño -->
+                    <article class="libro-card" id="libro-diseno">
+                        <div class="portada portada-diseno">
+                            <span class="portada-etiqueta">CREATIVIDAD</span>
+                            <div class="formas-diseno" aria-hidden="true">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <h3>Diseño</h3>
+                            <p>Principios visuales</p>
+                            <span class="portada-numero">03</span>
+                        </div>
+
+                        <div class="libro-info">
+                            <span class="libro-area">DISEÑO</span>
+                            <h3>Fundamentos del diseño</h3>
+                            <p class="autor">Wucius Wong</p>
+
+                            <div class="libro-pie">
+                                <span class="estado agotado">
+                                    <span></span> No disponible
+                                </span>
+                                <button type="button"
+                                        class="boton boton-reservar"
+                                        data-abrir-login>
+                                    Reservar libro
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Libro 4: ciencias -->
+                    <article class="libro-card" id="libro-fisica">
+                        <div class="portada portada-ciencias">
+                            <span class="portada-etiqueta">CIENCIAS NATURALES</span>
+                            <div class="portada-simbolo" aria-hidden="true">⚛</div>
+                            <h3>Física universitaria</h3>
+                            <p>Mecánica y movimiento</p>
+                            <span class="portada-numero">04</span>
+                        </div>
+
+                        <div class="libro-info">
+                            <span class="libro-area">FÍSICA</span>
+                            <h3>Física universitaria</h3>
+                            <p class="autor">Young &amp; Freedman</p>
+
+                            <div class="libro-pie">
+                                <span class="estado disponible">
+                                    <span></span> Disponible
+                                </span>
+                                <button type="button"
+                                        class="boton boton-reservar"
+                                        data-abrir-login>
+                                    Reservar libro
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Libro 5: algoritmos -->
+                    <article class="libro-card" id="libro-algoritmos">
+                        <div class="portada portada-algoritmos">
+                            <span class="portada-etiqueta">TECNOLOGÍA</span>
+                            <div class="portada-simbolo" aria-hidden="true">{ }</div>
+                            <h3>Algoritmos</h3>
+                            <p>Diseño y análisis</p>
+                            <span class="portada-numero">05</span>
+                        </div>
+
+                        <div class="libro-info">
+                            <span class="libro-area">PROGRAMACIÓN</span>
+                            <h3>Introducción a los algoritmos</h3>
+                            <p class="autor">Thomas H. Cormen</p>
+
+                            <div class="libro-pie">
+                                <span class="estado disponible">
+                                    <span></span> Disponible
+                                </span>
+                                <button type="button"
+                                        class="boton boton-reservar"
+                                        data-abrir-login>
+                                    Reservar libro
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Libro 6: álgebra lineal -->
+                    <article class="libro-card" id="libro-algebra">
+                        <div class="portada portada-matematicas">
+                            <span class="portada-etiqueta">CIENCIAS EXACTAS</span>
+                            <div class="portada-simbolo" aria-hidden="true">[A]</div>
+                            <h3>Álgebra lineal</h3>
+                            <p>Matrices y vectores</p>
+                            <span class="portada-numero">06</span>
+                        </div>
+
+                        <div class="libro-info">
+                            <span class="libro-area">MATEMÁTICAS</span>
+                            <h3>Álgebra lineal y sus aplicaciones</h3>
+                            <p class="autor">David C. Lay</p>
+
+                            <div class="libro-pie">
+                                <span class="estado disponible">
+                                    <span></span> Disponible
+                                </span>
+                                <button type="button"
+                                        class="boton boton-reservar"
+                                        data-abrir-login>
+                                    Reservar libro
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Libro 7: psicología -->
+                    <article class="libro-card" id="libro-psicologia">
+                        <div class="portada portada-sociales">
+                            <span class="portada-etiqueta">CIENCIAS SOCIALES</span>
+                            <div class="portada-simbolo" aria-hidden="true">◉</div>
+                            <h3>Psicología</h3>
+                            <p>Desarrollo humano</p>
+                            <span class="portada-numero">07</span>
+                        </div>
+
+                        <div class="libro-info">
+                            <span class="libro-area">PSICOLOGÍA</span>
+                            <h3>Psicología del desarrollo</h3>
+                            <p class="autor">John W. Santrock</p>
+
+                            <div class="libro-pie">
+                                <span class="estado agotado">
+                                    <span></span> No disponible
+                                </span>
+                                <button type="button"
+                                        class="boton boton-reservar"
+                                        data-abrir-login>
+                                    Reservar libro
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Libro 8: historia -->
+                    <article class="libro-card" id="libro-historia">
+                        <div class="portada portada-humanidades">
+                            <span class="portada-etiqueta">HUMANIDADES</span>
+                            <div class="portada-simbolo" aria-hidden="true">✦</div>
+                            <h3>Historia</h3>
+                            <p>Memoria y territorio</p>
+                            <span class="portada-numero">08</span>
+                        </div>
+
+                        <div class="libro-info">
+                            <span class="libro-area">HISTORIA</span>
+                            <h3>Historia de Colombia</h3>
+                            <p class="autor">David Bushnell</p>
+
+                            <div class="libro-pie">
+                                <span class="estado disponible">
+                                    <span></span> Disponible
+                                </span>
+                                <button type="button"
+                                        class="boton boton-reservar"
+                                        data-abrir-login>
+                                    Reservar libro
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Libro 9: marketing -->
+                    <article class="libro-card" id="libro-marketing">
+                        <div class="portada portada-administracion">
+                            <span class="portada-etiqueta">ADMINISTRACIÓN</span>
+                            <div class="portada-simbolo" aria-hidden="true">↗</div>
+                            <h3>Marketing</h3>
+                            <p>Valor y estrategia</p>
+                            <span class="portada-numero">09</span>
+                        </div>
+
+                        <div class="libro-info">
+                            <span class="libro-area">MERCADEO</span>
+                            <h3>Fundamentos de marketing</h3>
+                            <p class="autor">Philip Kotler</p>
+
+                            <div class="libro-pie">
+                                <span class="estado disponible">
+                                    <span></span> Disponible
+                                </span>
+                                <button type="button"
+                                        class="boton boton-reservar"
+                                        data-abrir-login>
+                                    Reservar libro
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <p class="nota-prototipo">
+                    Nota: los libros, autores y estados son datos de demostración.
+                    El catálogo definitivo debe conectarse con el inventario real.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- SERVICIO DE PRÉSTAMO DE EQUIPOS DE CÓMPUTO -->
+        <section class="seccion computo" id="computo">
+            <div class="contenedor computo-grid">
+
+                <div class="computo-texto">
+                    <span class="etiqueta">TECNOLOGÍA A TU ALCANCE</span>
+
+                    <h2>Tu próximo proyecto empieza aquí.</h2>
+
+                    <p>
+                        Solicita un equipo o un espacio de trabajo para
+                        desarrollar tus actividades académicas.
+                    </p>
+
+                    <ul class="beneficios">
+                        <li><span>✓</span> Equipos para diferentes necesidades</li>
+                        <li><span>✓</span> Horarios según disponibilidad</li>
+                        <li><span>✓</span> Servicio para estudiantes</li>
+                    </ul>
+
+                    <div class="computo-aviso">
+                        <span aria-hidden="true">ⓘ</span>
+                        <p>
+                            La solicitud es una demostración.
+                            La confirmación requiere validar los horarios
+                            y los equipos disponibles.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Formulario con etiquetas accesibles y campos requeridos -->
+                <form class="formulario tarjeta-formulario"
+                      action="#confirmacion-equipo"
+                      method="get">
+
+                    <div class="formulario-titulo">
+                        <span class="formulario-icono" aria-hidden="true">▣</span>
+                        <div>
+                            <h3>Solicitar equipo</h3>
+                            <p>Completa los datos de tu solicitud.</p>
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="nombre">Nombre completo</label>
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="Ej. Juan Pérez"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="matricula">ID / Matrícula</label>
+                        <input
+                            type="text"
+                            id="matricula"
+                            name="matricula"
+                            placeholder="Tu código estudiantil"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="tipo-equipo">Tipo de equipo o espacio</label>
+                        <select id="tipo-equipo" name="equipo" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="sala-general">Sala general</option>
+                            <option value="edicion">Sala de edición</option>
+                            <option value="laptop">Préstamo de laptop</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="fecha">Fecha deseada</label>
+                        <input type="date" id="fecha" name="fecha" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="horario">Horario deseado</label>
+                        <select id="horario" name="horario" required>
+                            <option value="">Selecciona un horario</option>
+                            <option value="08-10">08:00 a. m. – 10:00 a. m.</option>
+                            <option value="10-12">10:00 a. m. – 12:00 p. m.</option>
+                            <option value="14-16">02:00 p. m. – 04:00 p. m.</option>
+                            <option value="16-18">04:00 p. m. – 06:00 p. m.</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="boton boton-primario boton-ancho">
+                        Enviar solicitud <span aria-hidden="true">→</span>
+                    </button>
+
+                    <p class="texto-legal">
+                        Enviar este formulario no garantiza una reserva.
+                    </p>
+                </form>
+
+            </div>
+        </section>
+
+
+    </main>
+
+
+
+
+    <!-- PIE DE PÁGINA: información institucional y contacto -->
+    <footer class="footer">
+        <div class="contenedor footer-grid">
+
+            <div class="footer-marca">
+                <a class="logo logo-footer" href="#inicio">
+                    <img src="images/logo_udi.png"
+                         alt="Universidad de Ibagué"
+                         class="logo-udi">
+                    <span class="logo-texto">
+                        <span>Biblio<span class="logo-acento">Campus</span></span>
+                        <small>Universidad de Investigacion</small>
+                    </span>
+                </a>
+
+                <p>
+                    Un espacio para aprender, investigar
+                    y construir nuevas ideas.
+                </p>
+            </div>
+
+            <div class="footer-columna">
+                <h3>Explora</h3>
+                <a href="#catalogo">Catálogo de libros</a>
+                <a href="#computo">Préstamo de cómputo</a>
+                <a href="panel.html" data-abrir-login>Mi panel</a>
+            </div>
+
+            <div class="footer-columna">
+                <h3>Atención</h3>
+                <p>Lunes a viernes: 8:00 a. m. – 6:00 p. m.</p>
+                <p>Sábados: 8:00 a. m. – 12:00 p. m.</p>
+                <p class="footer-nota">
+                    Horarios de ejemplo, sujetos a cambios.
+                </p>
+            </div>
+
+            <div class="footer-columna">
+                <h3>Contacto</h3>
+                <a href="mailto:biblioteca@universidad.edu">
+                    biblioteca@universidad.edu
+                </a>
+                <p>Campus universitario</p>
+            </div>
+
+        </div>
+
+        <div class="footer-inferior">
+            <div class="contenedor footer-inferior-contenido">
+                <p>© 2026 BiblioCampus. Todos los derechos reservados.</p>
+                <a href="#inicio">Volver al inicio ↑</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- MODAL DE INICIO DE SESIÓN -->
+    <div class="modal-login" id="modalLogin" hidden>
+        <div class="modal-login-fondo" data-cerrar-login></div>
+
+        <div class="modal-login-contenido"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="tituloLoginModal">
+
+            <button type="button"
+                    class="modal-cerrar"
+                    id="cerrarLogin"
+                    aria-label="Cerrar inicio de sesión">
+                ×
+            </button>
+
+            <div class="modal-login-encabezado">
+                <img src="images/logo_udi.png"
+                     alt="Universidad de Ibagué"
+                     class="modal-logo">
+
+                <span class="etiqueta">ÁREA PERSONAL</span>
+                <h2 id="tituloLoginModal">Bienvenido de nuevo.</h2>
+                <p>
+                    Inicia sesión con tu correo institucional
+                    para acceder a tu panel personal.
+                </p>
+            </div>
+
+            <form class="formulario login-formulario" id="formularioLogin">
+                <div class="campo">
+                    <label for="correo">Correo institucional</label>
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        placeholder="estudiante@universidad.edu"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="contrasena">Contraseña</label>
+                    <input
+                        type="password"
+                        id="contrasena"
+                        name="contrasena"
+                        placeholder="Ingresa tu contraseña"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <p id="mensajeLogin"
+                   class="mensaje-login"
+                   role="alert"
+                   aria-live="polite"
+                   hidden></p>
+
+                <button type="submit" class="boton boton-primario boton-ancho">
+                    Iniciar sesión
+                </button>
+
+                <p class="texto-legal">
+                    Prototipo académico: las credenciales son de demostración.
+                    No ingreses tu contraseña real.
+                </p>
+            </form>
+
+            <div class="credencial-demo">
+                <strong>Cuenta de prueba del prototipo</strong>
+                <span>estudiante@universidad.edu</span>
+            </div>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Panel personal del estudiante de la Biblioteca Universitaria UDI.">
+
+    <title>Mi panel | BiblioCampus UDI</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- ENCABEZADO DEL PANEL -->
+    <header class="header">
+        <div class="contenedor navbar">
+
+            <a class="logo" href="index.html" aria-label="BiblioCampus UDI, ir al inicio">
+                <img src="images/logo_udi.png"
+                     alt="Universidad de Ibagué"
+                     class="logo-udi">
+                <span class="logo-texto">
+                    <span>Biblio<span class="logo-acento">Campus</span></span>
+                    <small>Universidad de Ibagué</small>
+                </span>
+            </a>
+
+            <nav class="navegacion" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="index.html#catalogo" class="nav-link">Catálogo de libros</a>
+                <a href="index.html#computo" class="nav-link">Préstamo de cómputo</a>
+                <span class="nav-link activo" aria-current="page">Mi panel</span>
+            </nav>
+
+            <div class="navbar-acciones">
+                <span class="usuario-nav usuario-nav-estatico">
+                    <span class="usuario-avatar" id="usuarioAvatar">E</span>
+                    <span class="usuario-datos">
+                        <strong id="usuarioNavNombre">Estudiante</strong>
+                        <small id="usuarioNavCorreo">Cargando…</small>
+                    </span>
+                </span>
+
+                <button type="button"
+                        class="boton boton-secundario boton-salir-nav"
+                        id="cerrarSesion">
+                    Cerrar sesión
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+
+    <main class="panel-pagina">
+        <section class="seccion panel-estudiante" aria-labelledby="tituloPanel">
+            <div class="contenedor">
+
+                <div class="encabezado-panel">
+                    <div>
+                        <span class="etiqueta">ÁREA PERSONAL</span>
+                        <h2 id="tituloPanel">¡Hola, estudiante!</h2>
+                        <p>
+                            Bienvenido a tu espacio personal de la
+                            Biblioteca Universitaria de la Universidad de Ibagué.
+                        </p>
+                    </div>
+                    <span class="rol-badge">Rol: Estudiante</span>
+                </div>
+
+                <div class="panel-aviso">
+                    <span aria-hidden="true">ⓘ</span>
+                    <p>
+                        Este panel es una demostración académica. La información
+                        de préstamos y reservas no proviene de una base de datos real.
+                    </p>
+                </div>
+
+                <div class="opciones-estudiante">
+
+                    <article class="tarjeta-estudiante">
+                        <span class="tarjeta-icono azul" aria-hidden="true">▤</span>
+                        <h3>Mis préstamos</h3>
+                        <p>Consulta tus libros prestados y sus fechas de devolución.</p>
+                        <button type="button"
+                                class="boton boton-primario"
+                                data-toggle="detallePrestamos"
+                                data-texto-abrir="Ver mis préstamos"
+                                data-texto-cerrar="Ocultar préstamos"
+                                aria-expanded="false"
+                                aria-controls="detallePrestamos">
+                            Ver mis préstamos
+                        </button>
+                        <div class="detalle-panel" id="detallePrestamos" hidden>
+                            <p>
+                                Todavía no hay préstamos registrados en esta cuenta
+                                de demostración.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="tarjeta-estudiante">
+                        <span class="tarjeta-icono naranja" aria-hidden="true">☆</span>
+                        <h3>Mis reservas</h3>
+                        <p>Consulta el estado de tus reservas de libros y espacios.</p>
+                        <button type="button"
+                                class="boton boton-primario"
+                                data-toggle="detalleReservas"
+                                data-texto-abrir="Ver mis reservas"
+                                data-texto-cerrar="Ocultar reservas"
+                                aria-expanded="false"
+                                aria-controls="detalleReservas">
+                            Ver mis reservas
+                        </button>
+                        <div class="detalle-panel" id="detalleReservas" hidden>
+                            <p>
+                                Todavía no hay reservas registradas en esta cuenta
+                                de demostración.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="tarjeta-estudiante">
+                        <span class="tarjeta-icono verde" aria-hidden="true">▣</span>
+                        <h3>Préstamo de equipos</h3>
+                        <p>Solicita un computador o reserva un espacio de trabajo.</p>
+                        <a href="index.html#computo" class="boton boton-primario">
+                            Solicitar equipo
+                        </a>
+                    </article>
+
+                    <article class="tarjeta-estudiante">
+                        <span class="tarjeta-icono azul" aria-hidden="true">◎</span>
+                        <h3>Mi perfil</h3>
+                        <p>Consulta la información de tu cuenta de estudiante.</p>
+                        <button type="button"
+                                class="boton boton-primario"
+                                data-toggle="detallePerfil"
+                                data-texto-abrir="Ver mi perfil"
+                                data-texto-cerrar="Ocultar perfil"
+                                aria-expanded="false"
+                                aria-controls="detallePerfil">
+                            Ver mi perfil
+                        </button>
+                        <div class="detalle-panel" id="detallePerfil" hidden>
+                            <dl class="perfil-datos">
+                                <div>
+                                    <dt>Correo</dt>
+                                    <dd id="perfilCorreo">—</dd>
+                                </div>
+                                <div>
+                                    <dt>Rol</dt>
+                                    <dd id="perfilRol">Estudiante</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="panel-acciones">
+                    <a href="index.html#catalogo" class="boton boton-secundario">
+                        Explorar catálogo
+                    </a>
+                    <button type="button"
+                            class="boton boton-secundario"
+                            id="cerrarSesionInferior">
+                        Cerrar sesión
+                    </button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+        <div class="contenedor footer-grid">
+
+            <div class="footer-marca">
+                <a class="logo logo-footer" href="index.html">
+                    <img src="images/logo_udi.png"
+                         alt="Universidad de Ibagué"
+                         class="logo-udi">
+                    <span class="logo-texto">
+                        <span>Biblio<span class="logo-acento">Campus</span></span>
+                        <small>Universidad de Ibagué</small>
+                    </span>
+                </a>
+
+                <p>
+                    Un espacio para aprender, investigar
+                    y construir nuevas ideas.
+                </p>
+            </div>
+
+            <div class="footer-columna">
+                <h3>Explora</h3>
+                <a href="index.html#catalogo">Catálogo de libros</a>
+                <a href="index.html#computo">Préstamo de cómputo</a>
+                <a href="panel.html">Mi panel</a>
+            </div>
+
+            <div class="footer-columna">
+                <h3>Atención</h3>
+                <p>Lunes a viernes: 8:00 a. m. – 6:00 p. m.</p>
+                <p>Sábados: 8:00 a. m. – 12:00 p. m.</p>
+                <p class="footer-nota">
+                    Horarios de ejemplo, sujetos a cambios.
+                </p>
+            </div>
+
+            <div class="footer-columna">
+                <h3>Contacto</h3>
+                <a href="mailto:biblioteca@universidad.edu">
+                    biblioteca@universidad.edu
+                </a>
+                <p>Campus universitario UDI</p>
+            </div>
+
+        </div>
+
+        <div class="footer-inferior">
+            <div class="contenedor footer-inferior-contenido">
+                <p>© 2026 BiblioCampus UDI. Todos los derechos reservados.</p>
+                <a href="index.html">Volver al inicio ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="panel.js"></script>
+</body>
+</html>
