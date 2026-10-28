@@ -1,4 +1,4 @@
-/* ==================================
+﻿/* ==================================
    PANEL PERSONAL DEL ESTUDIANTE UDI
    Comprueba la sesión y activa las tarjetas
 ================================== */
@@ -11,21 +11,13 @@
     function leerSesion() {
         try {
             const guardada = sessionStorage.getItem(CLAVE_SESION);
-
-            if (!guardada) {
-                return null;
-            }
-
+            if (!guardada) return null;
             const sesion = JSON.parse(guardada);
-
-            if (!sesion ||
-                typeof sesion.correo !== "string" ||
-                sesion.rol !== "Estudiante") {
+            if (!sesion || typeof sesion.correo !== "string" || sesion.rol !== "Estudiante") {
                 return null;
             }
-
             return sesion;
-        } catch (error) {
+        } catch (e) {
             return null;
         }
     }
@@ -37,16 +29,14 @@
     function cerrarSesion() {
         try {
             sessionStorage.removeItem(CLAVE_SESION);
-        } catch (error) {
+        } catch (e) {
             volverAlInicio();
             return;
         }
-
         volverAlInicio();
     }
 
     const sesion = leerSesion();
-
     if (!sesion) {
         volverAlInicio();
         return;
@@ -58,36 +48,17 @@
     const usuarioNavNombre = document.getElementById("usuarioNavNombre");
     const usuarioAvatar = document.getElementById("usuarioAvatar");
 
-    if (perfilCorreo) {
-        perfilCorreo.textContent = sesion.correo;
-    }
-
-    if (perfilRol) {
-        perfilRol.textContent = sesion.rol;
-    }
-
-    if (usuarioNavCorreo) {
-        usuarioNavCorreo.textContent = sesion.correo;
-    }
-
-    if (usuarioNavNombre) {
-        usuarioNavNombre.textContent = sesion.rol;
-    }
-
-    if (usuarioAvatar) {
-        usuarioAvatar.textContent = sesion.correo.charAt(0).toUpperCase();
-    }
+    if (perfilCorreo) perfilCorreo.textContent = sesion.correo;
+    if (perfilRol) perfilRol.textContent = sesion.rol;
+    if (usuarioNavCorreo) usuarioNavCorreo.textContent = sesion.correo;
+    if (usuarioNavNombre) usuarioNavNombre.textContent = sesion.rol;
+    if (usuarioAvatar) usuarioAvatar.textContent = sesion.correo.charAt(0).toUpperCase();
 
     document.querySelectorAll("[data-toggle]").forEach(function (boton) {
         boton.addEventListener("click", function () {
             const detalle = document.getElementById(boton.dataset.toggle);
-
-            if (!detalle) {
-                return;
-            }
-
+            if (!detalle) return;
             const seVaAMostrar = detalle.hidden;
-
             detalle.hidden = !seVaAMostrar;
             boton.setAttribute("aria-expanded", String(seVaAMostrar));
             boton.textContent = seVaAMostrar

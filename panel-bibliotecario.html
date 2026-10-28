@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel del Bibliotecario - Biblioteca Universitaria UDI.">
+    <title>Panel Bibliotecario | BiblioCampus UDI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="panel-admin-body">
+    <header class="header">
+        <div class="contenedor navbar">
+            <a class="logo" href="index.html" aria-label="BiblioCampus UDI, ir al inicio">
+                <img src="images/logo_udi.png" alt="Universidad de Ibagué" class="logo-udi">
+                <span class="logo-texto">
+                    <span>Biblio<span class="logo-acento">Campus</span></span>
+                    <small>Universidad de Ibagué</small>
+                </span>
+            </a>
+            <nav class="navegacion" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <span class="nav-link activo" aria-current="page">Panel Bibliotecario</span>
+            </nav>
+            <div class="navbar-acciones">
+                <span class="usuario-nav usuario-nav-estatico">
+                    <span class="usuario-avatar" id="usuarioAvatar">B</span>
+                    <span class="usuario-datos">
+                        <strong id="usuarioNavNombre">Bibliotecario</strong>
+                        <small id="usuarioNavCorreo">bibliotecario@universidad.edu</small>
+                    </span>
+                </span>
+                <button type="button" class="boton boton-secundario boton-salir-nav" id="cerrarSesion">Cerrar sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="panel-pagina">
+        <section class="seccion panel-operativo" aria-labelledby="tituloPanelBiblio">
+            <div class="contenedor">
+                <div class="encabezado-panel">
+                    <div>
+                        <span class="etiqueta">PANEL OPERATIVO</span>
+                        <h2 id="tituloPanelBiblio">Panel del Bibliotecario</h2>
+                        <p>Gestión de libros, préstamos, devoluciones, reservas y solicitudes de equipos.</p>
+                    </div>
+                    <span class="rol-badge">Rol: Bibliotecario</span>
+                </div>
+                <div class="panel-aviso">
+                    <span aria-hidden="true">ⓘ</span>
+                    <p>Datos demostrativos. Las acciones se guardan en localStorage para este prototipo.</p>
+                </div>
+
+                <div class="resumen-grid">
+                    <article class="tarjeta-resumen"><span class="tarjeta-resumen-icono azul">▤</span><div><strong id="resumenLibros">0</strong><span>Total libros</span></div></article>
+                    <article class="tarjeta-resumen"><span class="tarjeta-resumen-icono verde">✓</span><div><strong id="resumenPrestamos">0</strong><span>Préstamos activos</span></div></article>
+                    <article class="tarjeta-resumen"><span class="tarjeta-resumen-icono naranja">☆</span><div><strong id="resumenReservas">0</strong><span>Reservas pendientes</span></div></article>
+                    <article class="tarjeta-resumen"><span class="tarjeta-resumen-icono azul">▣</span><div><strong id="resumenEquipos">0</strong><span>Solicitudes de equipos pendientes</span></div></article>
+                </div>
+
+                <section class="bloque-gestion">
+                    <div class="bloque-encabezado">
+                        <div><h3>Gestión de libros</h3><p>Administrar catálogo, disponibilidad y datos de los libros.</p></div>
+                        <button type="button" class="boton boton-primario" id="btnNuevoLibro">Añadir libro</button>
+                    </div>
+                    <div class="tabla-wrapper">
+                        <table class="tabla-datos" id="tablaLibros">
+                            <thead><tr><th>Título</th><th>Autor</th><th>Categoría</th><th>ISBN</th><th>Disponibilidad</th><th>Acciones</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <p class="estado-vacio" id="sinLibros" hidden>No hay libros registrados.</p>
+                </section>
+
+                <section class="bloque-gestion">
+                    <div class="bloque-encabezado">
+                        <div><h3>Préstamos y devoluciones</h3><p>Registrar préstamos, devoluciones y actualizar disponibilidad.</p></div>
+                        <button type="button" class="boton boton-secundario" id="btnNuevoPrestamo">Registrar préstamo</button>
+                    </div>
+                    <div class="tabla-wrapper">
+                        <table class="tabla-datos" id="tablaPrestamos">
+                            <thead><tr><th>Libro</th><th>Usuario</th><th>Fecha préstamo</th><th>Fecha devolución</th><th>Estado</th><th>Acciones</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <p class="estado-vacio" id="sinPrestamos" hidden>No hay préstamos registrados.</p>
+                </section>
+
+                <section class="bloque-gestion">
+                    <div class="bloque-encabezado">
+                        <div><h3>Reservas</h3><p>Consultar y cambiar estado de reservas.</p></div>
+                    </div>
+                    <div class="tabla-wrapper">
+                        <table class="tabla-datos" id="tablaReservas">
+                            <thead><tr><th>Libro</th><th>Usuario</th><th>Fecha reserva</th><th>Estado</th><th>Acciones</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <p class="estado-vacio" id="sinReservas" hidden>No hay reservas registradas.</p>
+                </section>
+
+                <section class="bloque-gestion">
+                    <div class="bloque-encabezado">
+                        <div><h3>Solicitudes de equipos</h3><p>Gestionar solicitudes de préstamo de computadores/espacios.</p></div>
+                    </div>
+                    <div class="tabla-wrapper">
+                        <table class="tabla-datos" id="tablaEquipos">
+                            <thead><tr><th>Solicitante</th><th>Tipo</th><th>Fecha</th><th>Horario</th><th>Estado</th><th>Acciones</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <p class="estado-vacio" id="sinEquipos" hidden>No hay solicitudes registradas.</p>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="contenedor footer-grid">
+            <div class="footer-marca">
+                <a class="logo logo-footer" href="index.html">
+                    <img src="images/logo_udi.png" alt="Universidad de Ibagué" class="logo-udi">
+                    <span class="logo-texto"><span>Biblio<span class="logo-acento">Campus</span></span><small>Universidad de Ibagué</small></span>
+                </a>
+                <p>Un espacio para aprender, investigar y construir nuevas ideas.</p>
+            </div>
+            <div class="footer-columna"><h3>Explora</h3><a href="index.html#catalogo">Catálogo de libros</a><a href="index.html#computo">Préstamo de cómputo</a></div>
+            <div class="footer-columna"><h3>Atención</h3><p>Lunes a viernes: 8:00 a. m. – 6:00 p. m.</p><p>Sábados: 8:00 a. m. – 12:00 p. m.</p></div>
+            <div class="footer-columna"><h3>Contacto</h3><a href="mailto:biblioteca@universidad.edu">biblioteca@universidad.edu</a></div>
+        </div>
+        <div class="footer-inferior"><div class="contenedor footer-inferior-contenido"><p>© 2026 BiblioCampus UDI. Todos los derechos reservados.</p><a href="index.html">Volver al inicio ↑</a></div></div>
+    </footer>
+
+    <div class="modal" id="modalLibro" hidden>
+        <div class="modal-fondo" data-cerrar-modal></div>
+        <div class="modal-contenido" role="dialog" aria-modal="true">
+            <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">×</button>
+            <h3>Libro</h3>
+            <form id="formLibro" class="formulario">
+                <input type="hidden" id="libroId">
+                <div class="campo"><label for="libroTitulo">Título</label><input type="text" id="libroTitulo" required></div>
+                <div class="campo"><label for="libroAutor">Autor</label><input type="text" id="libroAutor" required></div>
+                <div class="campo"><label for="libroCategoria">Categoría</label><input type="text" id="libroCategoria" required></div>
+                <div class="campo"><label for="libroIsbn">ISBN</label><input type="text" id="libroIsbn" required></div>
+                <div class="campo"><label for="libroDisponible">Disponibilidad</label><select id="libroDisponible"><option value="true">Disponible</option><option value="false">No disponible</option></select></div>
+                <button type="submit" class="boton boton-primario boton-ancho">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modalPrestamo" hidden>
+        <div class="modal-fondo" data-cerrar-modal></div>
+        <div class="modal-contenido" role="dialog" aria-modal="true">
+            <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">×</button>
+            <h3>Registrar préstamo</h3>
+            <form id="formPrestamo" class="formulario">
+                <div class="campo"><label for="prestamoLibro">Libro</label><select id="prestamoLibro" required></select></div>
+                <div class="campo"><label for="prestamoUsuario">Usuario (correo)</label><input type="email" id="prestamoUsuario" required></div>
+                <div class="campo"><label for="prestamoFecha">Fecha préstamo</label><input type="date" id="prestamoFecha" required></div>
+                <button type="submit" class="boton boton-primario boton-ancho">Registrar préstamo</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="panel-bibliotecario.js"></script>
+</body>
+</html>

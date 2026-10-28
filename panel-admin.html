@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de Administración - Biblioteca Universitaria UDI.">
+    <title>Panel Administrador | BiblioCampus UDI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="panel-admin-body">
+    <header class="header">
+        <div class="contenedor navbar">
+            <a class="logo" href="index.html" aria-label="BiblioCampus UDI, ir al inicio">
+                <img src="images/logo_udi.png" alt="Universidad de Ibagué" class="logo-udi">
+                <span class="logo-texto">
+                    <span>Biblio<span class="logo-acento">Campus</span></span>
+                    <small>Universidad de Ibagué</small>
+                </span>
+            </a>
+            <nav class="navegacion" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <span class="nav-link activo" aria-current="page">Panel Administrador</span>
+            </nav>
+            <div class="navbar-acciones">
+                <span class="usuario-nav usuario-nav-estatico">
+                    <span class="usuario-avatar" id="usuarioAvatar">A</span>
+                    <span class="usuario-datos">
+                        <strong id="usuarioNavNombre">Administrador</strong>
+                        <small id="usuarioNavCorreo">admin@universidad.edu</small>
+                    </span>
+                </span>
+                <button type="button" class="boton boton-secundario boton-salir-nav" id="cerrarSesion">Cerrar sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="panel-pagina">
+        <section class="seccion panel-operativo" aria-labelledby="tituloPanelAdmin">
+            <div class="contenedor">
+                <div class="encabezado-panel">
+                    <div>
+                        <span class="etiqueta">PANEL DE ADMINISTRACIÓN</span>
+                        <h2 id="tituloPanelAdmin">Panel del Administrador Total</h2>
+                        <p>Gestión general de usuarios, libros, préstamos, reservas, equipos y reportes.</p>
+                    </div>
+                    <span class="rol-badge">Rol: Administrador</span>
+                </div>
+                <div class="panel-aviso">
+                    <span aria-hidden="true">ⓘ</span>
+                    <p>Prototipo con localStorage. No guardar contraseñas reales. Las acciones de desactivación/eliminación están protegidas para la cuenta admin.</p>
+                </div>
+
+                <div class="resumen-grid">
+                    <article class="tarjeta-resumen"><span class="tarjeta-resumen-icono azul">◎</span><div><strong id="resumenUsuarios">0</strong><span>Total usuarios</span></div></article>
+                    <article class="tarjeta-resumen"><span class="tarjeta-resumen-icono azul">▤</span><div><strong id="resumenLibros">0</strong><span>Total libros</span></div></article>
+                    <article class="tarjeta-resumen"><span class="tarjeta-resumen-icono verde">✓</span><div><strong id="resumenPrestamos">0</strong><span>Préstamos activos</span></div></article>
+                    <article class="tarjeta-resumen"><span class="tarjeta-resumen-icono naranja">☆</span><div><strong id="resumenReservas">0</strong><span>Reservas pendientes</span></div></article>
+                </div>
+
+                <section class="bloque-gestion">
+                    <div class="bloque-encabezado">
+                        <div><h3>Gestión de usuarios</h3><p>Listar, crear, editar, activar/desactivar usuarios.</p></div>
+                        <button type="button" class="boton boton-primario" id="btnNuevoUsuario">Registrar usuario</button>
+                    </div>
+                    <div class="tabla-wrapper">
+                        <table class="tabla-datos" id="tablaUsuarios">
+                            <thead><tr><th>Correo</th><th>Nombre/Rol visible</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <p class="estado-vacio" id="sinUsuarios" hidden>No hay usuarios registrados.</p>
+                </section>
+
+                <section class="bloque-gestion">
+                    <div class="bloque-encabezado">
+                        <div><h3>Gestión general de libros</h3><p>Consultar, añadir, editar y cambiar disponibilidad.</p></div>
+                        <button type="button" class="boton boton-secundario" id="btnNuevoLibroAdmin">Añadir libro</button>
+                    </div>
+                    <div class="tabla-wrapper">
+                        <table class="tabla-datos" id="tablaLibrosAdmin">
+                            <thead><tr><th>Título</th><th>Autor</th><th>Categoría</th><th>ISBN</th><th>Disponibilidad</th><th>Acciones</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="bloque-gestion">
+                    <div class="bloque-encabezado">
+                        <div><h3>Préstamos y reservas</h3><p>Consultar préstamos y reservas registrados.</p></div>
+                    </div>
+                    <div class="tabla-wrapper">
+                        <table class="tabla-datos" id="tablaPrestamosAdmin">
+                            <thead><tr><th>Libro</th><th>Usuario</th><th>Fecha préstamo</th><th>Fecha devolución</th><th>Estado</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="tabla-wrapper" style="margin-top:16px;">
+                        <table class="tabla-datos" id="tablaReservasAdmin">
+                            <thead><tr><th>Libro</th><th>Usuario</th><th>Fecha reserva</th><th>Estado</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="bloque-gestion">
+                    <div class="bloque-encabezado">
+                        <div><h3>Solicitudes de equipos</h3><p>Consultar solicitudes de equipos.</p></div>
+                    </div>
+                    <div class="tabla-wrapper">
+                        <table class="tabla-datos" id="tablaEquiposAdmin">
+                            <thead><tr><th>Solicitante</th><th>Tipo</th><th>Fecha</th><th>Horario</th><th>Estado</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="bloque-gestion">
+                    <div class="bloque-encabezado">
+                        <div><h3>Reportes y actividad</h3><p>Resumen y registro de acciones realizadas.</p></div>
+                    </div>
+                    <div class="reportes-grid">
+                        <article class="reporte-card">
+                            <h4>Resumen</h4>
+                            <ul class="lista-reporte">
+                                <li><span>Total libros:</span> <strong id="repLibros">0</strong></li>
+                                <li><span>Préstamos activos:</span> <strong id="repPrestamos">0</strong></li>
+                                <li><span>Reservas pendientes:</span> <strong id="repReservas">0</strong></li>
+                                <li><span>Solicitudes equipos pendientes:</span> <strong id="repEquipos">0</strong></li>
+                                <li><span>Usuarios totales:</span> <strong id="repUsuarios">0</strong></li>
+                            </ul>
+                        </article>
+                        <article class="reporte-card">
+                            <h4>Registro de actividad</h4>
+                            <ul class="lista-actividad" id="listaActividad"></ul>
+                            <p class="estado-vacio" id="sinActividad" hidden>Sin actividad registrada.</p>
+                        </article>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="contenedor footer-grid">
+            <div class="footer-marca">
+                <a class="logo logo-footer" href="index.html">
+                    <img src="images/logo_udi.png" alt="Universidad de Ibagué" class="logo-udi">
+                    <span class="logo-texto"><span>Biblio<span class="logo-acento">Campus</span></span><small>Universidad de Ibagué</small></span>
+                </a>
+                <p>Un espacio para aprender, investigar y construir nuevas ideas.</p>
+            </div>
+            <div class="footer-columna"><h3>Explora</h3><a href="index.html#catalogo">Catálogo de libros</a><a href="index.html#computo">Préstamo de cómputo</a></div>
+            <div class="footer-columna"><h3>Atención</h3><p>Lunes a viernes: 8:00 a. m. – 6:00 p. m.</p><p>Sábados: 8:00 a. m. – 12:00 p. m.</p></div>
+            <div class="footer-columna"><h3>Contacto</h3><a href="mailto:biblioteca@universidad.edu">biblioteca@universidad.edu</a></div>
+        </div>
+        <div class="footer-inferior"><div class="contenedor footer-inferior-contenido"><p>© 2026 BiblioCampus UDI. Todos los derechos reservados.</p><a href="index.html">Volver al inicio ↑</a></div></div>
+    </footer>
+
+    <div class="modal" id="modalUsuario" hidden>
+        <div class="modal-fondo" data-cerrar-modal></div>
+        <div class="modal-contenido" role="dialog" aria-modal="true">
+            <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">×</button>
+            <h3>Usuario</h3>
+            <form id="formUsuario" class="formulario">
+                <input type="hidden" id="usuarioId">
+                <div class="campo"><label for="usuarioCorreo">Correo</label><input type="email" id="usuarioCorreo" required></div>
+                <div class="campo"><label for="usuarioNombre">Nombre/Rol visible</label><input type="text" id="usuarioNombre" required></div>
+                <div class="campo"><label for="usuarioRol">Rol</label><select id="usuarioRol" required><option value="Estudiante">Estudiante</option><option value="Bibliotecario">Bibliotecario</option><option value="Administrador">Administrador</option></select></div>
+                <div class="campo"><label for="usuarioActivo">Estado</label><select id="usuarioActivo"><option value="true">Activo</option><option value="false">Desactivado</option></select></div>
+                <button type="submit" class="boton boton-primario boton-ancho">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modalLibroAdmin" hidden>
+        <div class="modal-fondo" data-cerrar-modal></div>
+        <div class="modal-contenido" role="dialog" aria-modal="true">
+            <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">×</button>
+            <h3>Libro</h3>
+            <form id="formLibroAdmin" class="formulario">
+                <input type="hidden" id="libroIdAdmin">
+                <div class="campo"><label for="libroTituloAdmin">Título</label><input type="text" id="libroTituloAdmin" required></div>
+                <div class="campo"><label for="libroAutorAdmin">Autor</label><input type="text" id="libroAutorAdmin" required></div>
+                <div class="campo"><label for="libroCategoriaAdmin">Categoría</label><input type="text" id="libroCategoriaAdmin" required></div>
+                <div class="campo"><label for="libroIsbnAdmin">ISBN</label><input type="text" id="libroIsbnAdmin" required></div>
+                <div class="campo"><label for="libroDisponibleAdmin">Disponibilidad</label><select id="libroDisponibleAdmin"><option value="true">Disponible</option><option value="false">No disponible</option></select></div>
+                <button type="submit" class="boton boton-primario boton-ancho">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="panel-admin.js"></script>
+</body>
+</html>
